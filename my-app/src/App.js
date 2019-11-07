@@ -55,13 +55,9 @@ class App extends React.Component {
   }
 
   RemoveBuilding(id) {
-
-    console.log("RemoveBuilding id: ", id)
-
+    console.log(" id: ", id)
     const index = this.state.buildingArray.findIndex(building=> building.id===id)
-
     this.state.buildingArray.splice(index, 1)
-
   }
 
 
@@ -76,35 +72,23 @@ class App extends React.Component {
         </div>
 
 
-
-        
         <BuildingForm
         AddBuilding={this.AddBuilding.bind(this)}
-        // RemoveBuilding={this.RemoveBuilding.bind(this)}
-        >
+        />
 
-        </BuildingForm>
-
-
-
-      
 
         <Search
         filterText={this.state.filterText}
         filterUpdate={this.filterUpdate.bind(this)}
         />
+
+
         <main>
           <div className="row">
-            
-         
-
-
-
             <div className="column1">
-              
-
               <div className="tableWrapper">
                 <table className="table table-striped table-hover">
+                  
                   <tr>
                     <td>
                       <b>Code Building</b>
@@ -118,23 +102,19 @@ class App extends React.Component {
                     selectedBuilding={this.state.selectedBuilding}
                     RemoveBuilding={this.RemoveBuilding.bind(this)}
                   />
-
                 </table>
               </div>
             </div>
-            
-            
             <div className="column2">
               <ViewBuilding 
               data={this.props.data}
               selectedBuilding={this.state.selectedBuilding}
               />
             </div>
-          
-            
           </div>
+
+
           <Credit />
-        
         
         </main>
       </div>

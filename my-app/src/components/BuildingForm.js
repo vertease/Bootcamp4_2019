@@ -2,8 +2,6 @@ import React from 'react';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
-import AddBuilding from './AddBuilding';
-import RemoveBuilding from './RemoveBuilding';
 
 class BuildingForm extends React.Component {
     constructor(props) {
@@ -72,9 +70,7 @@ class BuildingForm extends React.Component {
             <Button 
             onClick={this.addOne.bind(this)}
             variant="info">
-                
                 Add
-            
             </Button>
 
           
