@@ -8,17 +8,32 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // bList: [],
       filterText: '',
       selectedBuilding: 0
     };
   }
 
+  // componentWillMount(){
+  //   this.setState({
+  //     ...this.state,
+  //     data: this.props.data
+  //   })
+  // }
+
+
   filterUpdate(value) {
-    //Here you will need to set the filterText property of state to the value passed into this function
+    console.log('update', value)
+    this.setState(
+      {filterText: value}
+    )
   }
 
   selectedUpdate(id) {
-    //Here you will need to update the selectedBuilding property of state to the id passed into this function
+    console.log('update', id)
+    this.setState(
+      {selectedBuilding: id}
+    )
   }
 
   render() {
@@ -29,7 +44,10 @@ class App extends React.Component {
           <h1>UF Directory App</h1>
         </div>
 
-        <Search/>
+        <Search
+        filterText={this.state.filterText}
+        filterUpdate={this.filterUpdate.bind(this)}
+        />
         <main>
           <div className="row">
             <div className="column1">
@@ -42,6 +60,11 @@ class App extends React.Component {
                   </tr>
                   <BuildingList
                     data={this.props.data}
+                    filterText={this.state.filterText}
+
+
+
+
                   />
                 </table>
               </div>
