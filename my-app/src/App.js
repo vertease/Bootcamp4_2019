@@ -14,39 +14,33 @@ class App extends React.Component {
       filterText: '',
       selectedBuilding: 0,
       removeIndex: 0,
-      exists: true
+      exists: true,
+      buildingArray: []
     };
   }
 
   componentWillMount(){
     this.setState({
       ...this.state,
-      data: this.props.data
+      buildingArray: this.props.data
     })
   }
 
-
-
   filterUpdate(value) {
-    console.log("clicked value: ", value)
+    console.log("filterUpdate value: ", value)
     this.setState(
       {filterText: value}
     )
   }
 
   selectedUpdate(id) {
-    console.log("clicked id: ", id)
+    console.log("selectedUpdate id: ", id)
     this.setState(
       {selectedBuilding: id}
     )
   }
 
-  RemoveBuilding(id) {
-    console.log("remove id: ", id)
-  }
-
   AddBuilding(building){
-
     const b = {
       id: this.props.data.length+1, 
       code: building.inputCode,
@@ -56,21 +50,27 @@ class App extends React.Component {
         latitude: building.inputLat,
         longitude: building.inputLong
       }
-
     }
-
-    this.props.data.push(b)
+    this.state.buildingArray.push(b)
   }
 
-  RemoveBuilding(building){
-    console.warn(building)
-    // this.props.data = this.props.data.filter(building => building.id)
+  RemoveBuilding(id) {
+
+    console.log("RemoveBuilding id: ", id)
+
+    const index = this.state.buildingArray.findIndex(building=> building.id===id)
+
+    this.state.buildingArray.splice(index, 1)
+
   }
+
+
 
   render() {
     
     return (
       <div className="bg">
+
         <div className="row">
           <h1>UF Directory App</h1>
         </div>
@@ -80,7 +80,7 @@ class App extends React.Component {
         
         <BuildingForm
         AddBuilding={this.AddBuilding.bind(this)}
-        RemoveBuilding={this.RemoveBuilding.bind(this)}
+        // RemoveBuilding={this.RemoveBuilding.bind(this)}
         >
 
         </BuildingForm>
@@ -102,6 +102,7 @@ class App extends React.Component {
 
             <div className="column1">
               
+
               <div className="tableWrapper">
                 <table className="table table-striped table-hover">
                   <tr>
@@ -109,18 +110,15 @@ class App extends React.Component {
                       <b>Code Building</b>
                     </td>
                   </tr>
+
                   <BuildingList
-                    data={this.props.data}
+                    data={this.state.buildingArray}
                     filterText={this.state.filterText}
                     selectedUpdate={this.selectedUpdate.bind(this)}
                     selectedBuilding={this.state.selectedBuilding}
                     RemoveBuilding={this.RemoveBuilding.bind(this)}
-                    
-
-
-
-
                   />
+
                 </table>
               </div>
             </div>
